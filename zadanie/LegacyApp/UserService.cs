@@ -1,20 +1,26 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 
 namespace LegacyApp
 {
     public class UserService
+    
     {
-        public bool AddUser(string firstName, string lastName, string email, DateTime dateOfBirth, int clientId)
+        public bool validateNameAndSurname(string firstName,string lastName)
         {
             if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName))
             {
                 return false;
             }
+            return true;
+        }
 
-            if (!email.Contains("@") && !email.Contains("."))
-            {
-                return false;
-            }
+        
+        
+        public bool AddUser(string firstName, string lastName, string email, DateTime dateOfBirth, int clientId)
+        {
+          //validate name
+          //validate e mail
 
             var now = DateTime.Now;
             int age = now.Year - dateOfBirth.Year;
