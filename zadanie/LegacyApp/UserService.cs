@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices.JavaScript;
 using System.Text.RegularExpressions;
 
 namespace LegacyApp
@@ -21,20 +22,33 @@ namespace LegacyApp
             
             return Regex.IsMatch(email, pattern);
         }
+
+        public int getAge(DateTime dateOfBirth)
+        {
+            var now = DateTime.Now;
+            int age = now.Year - dateOfBirth.Year;
+            if (now.Month < dateOfBirth.Month || (now.Month == dateOfBirth.Month && now.Day < dateOfBirth.Day))
+            {
+                age--;
+            }
+            return age;
+        }
+
+        public bool checkAge(DateTime dateOfBirth)
+        {
+            if (getAge(dateOfBirth)<21)
+            {
+                return false;
+            }
+
+            return true;
+        }
         
         public bool AddUser(string firstName, string lastName, string email, DateTime dateOfBirth, int clientId)
         {
           //validate name
           //validate e mail
-
-            var now = DateTime.Now;
-            int age = now.Year - dateOfBirth.Year;
-            if (now.Month < dateOfBirth.Month || (now.Month == dateOfBirth.Month && now.Day < dateOfBirth.Day)) age--;
-
-            if (age < 21)
-            {
-                return false;
-            }
+          //check age
 
             var clientRepository = new ClientRepository();
             var client = clientRepository.GetById(clientId);
