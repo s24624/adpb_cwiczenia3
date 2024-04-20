@@ -15,7 +15,12 @@ namespace LegacyApp
             return true;
         }
 
-        
+        static bool IsValidEmail(string email)
+        {
+            string pattern = @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
+            
+            return Regex.IsMatch(email, pattern);
+        }
         
         public bool AddUser(string firstName, string lastName, string email, DateTime dateOfBirth, int clientId)
         {
