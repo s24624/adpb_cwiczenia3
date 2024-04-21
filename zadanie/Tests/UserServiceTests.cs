@@ -45,7 +45,22 @@ public class UserServiceTests
         var service = new UserService();
         
         bool result = service.AddUser(firstName, lastName, email, dateBirth, clinetId);
+       
+        Assert.Equal(false,result);
+    }
+    
+    [Fact]
+    public void addUser_should_return_false_if_age_is_lower_than_21()
+    {
+        string firstName = "John",
+            lastName = "Doe",
+            email = "incorrect";
+        DateTime dateBirth = DateTime.Parse("2020-03-21");
+        int clinetId = 1;
+        var service = new UserService();
         
+        bool result = service.AddUser(firstName, lastName, email, dateBirth, clinetId);
+       
         Assert.Equal(false,result);
     }
     
